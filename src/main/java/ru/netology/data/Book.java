@@ -1,8 +1,10 @@
 package ru.netology.data;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode
 public class Book extends Product {
     private String author;
 
