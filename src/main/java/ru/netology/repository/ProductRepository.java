@@ -4,12 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.netology.data.Product;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class ProductRepository {
 
-    private  Product [] goods = new Product[0];
+    private Product[] goods = new Product[0];
 
     public void save(Product item) {
         int length = goods.length + 1;
@@ -19,11 +20,12 @@ public class ProductRepository {
         tmp[lastIndex] = item;
         goods = tmp;
     }
-    public Product [] findAll(){
+
+    public Product[] findAll() {
         return goods;
     }
 
-    public void removeById (int id) {
+    public void removeById(int id) {
         int length = goods.length - 1;
         Product[] tmp = new Product[length];
         int index = 0;

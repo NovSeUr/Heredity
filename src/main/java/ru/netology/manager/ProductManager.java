@@ -31,9 +31,9 @@ public class ProductManager {
         return result;
     }
 
-        private boolean matches (Product product, String search){
-            return product.getName().contains(search);
-        }
+    private boolean matches(Product product, String search) {
+        return product.getName().contains(search);
     }
+}
 
 
