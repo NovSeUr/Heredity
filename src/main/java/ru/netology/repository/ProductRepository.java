@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.netology.data.Product;
+import ru.netology.exceptions.AlreadyExistsException;
+import ru.netology.exceptions.NotFoundException;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,7 +14,11 @@ public class ProductRepository {
 
     private Product[] goods = new Product[0];
 
+
     public void save(Product item) {
+        if (findById(item.getId()) != null) {
+            throw new AlreadyExistsException("Товар с ID: " + item.getId() + " уже добавлен в репозиторий!");
+        }
         int length = goods.length + 1;
         Product[] tmp = new Product[length];
         System.arraycopy(goods, 0, tmp, 0, goods.length);
@@ -26,6 +32,9 @@ public class ProductRepository {
     }
 
     public void removeById(int id) {
+        if (findById(id) == null) {
+            throw new NotFoundException("Товар с ID: " + id + " не существует!");
+        }
         int length = goods.length - 1;
         Product[] tmp = new Product[length];
         int index = 0;
@@ -37,4 +46,14 @@ public class ProductRepository {
         }
         goods = tmp;
     }
+
+    public Product findById(int id) {
+        for (Product item : goods) {
+            if (item.getId() == id) {
+                return item;
+            }
+        }
+        return null;
+    }
 }
+
